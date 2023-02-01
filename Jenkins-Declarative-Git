@@ -1,0 +1,19 @@
+pipeline{
+    agent any
+    
+    environment{
+        PATH = "/opt/maven/bin:$PATH"
+     }
+     stages{
+         stage("Git_Checout"){
+              steps{
+                  git credentialsId: 'b2dd556c-b932-4365-bac8-7270f7e8e200', url: 'https://github.com/umahanish/mavenproject'
+              }
+          }
+          stage("Maven Build"){
+              steps{
+                  sh "mvn clean package"
+              }
+           }  
+        }
+    }
